@@ -74,7 +74,7 @@ body {
   padding: 0.7rem 1rem;
   border-radius: 13px;
   border: none;
-  font-size: .8rem;
+  font-size: 0.8rem;
   box-shadow: 2px 3px 5px 4px #cdcccc, -3px 2px 2px 4px #828282;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
@@ -84,6 +84,13 @@ body {
   width: 50px;
   border-radius: 50%;
   padding: 0.6rem;
+}
+
+.button.active {
+  box-shadow: 2px 3px 5px 4px #ff9393, -3px 2px 2px 4px #ff5050;
+  color: #ff9393;
+  outline: 2px solid #ff5050;
+  background-color: #ff5050;
 }
 
 .button:active {

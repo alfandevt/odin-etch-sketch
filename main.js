@@ -8,11 +8,14 @@ let gridSize = minimumGridSize;
 let color = defaultColor;
 let bgColor = defaultBgColor;
 let randomMode = false;
+let eraseMode = false;
 
 let hasInit = false;
 
 const boardEl = document.querySelector('#board');
 const resetButtonEl = document.querySelector('#reset-button');
+const eraseButtonEl = document.querySelector('#erase-button');
+const randomButtonEl = document.querySelector('#random-button');
 const sizeSliderEl = document.querySelector('#size-slider');
 const sliderText = document.querySelector('#slider-text');
 const colorPicker = document.querySelector('#color-picker');
@@ -81,6 +84,30 @@ function initRender() {
     document.dispatchEvent(new Event(EVENTS.RENDER));
   });
 
+  eraseButtonEl.addEventListener('click', (event) => {
+    eraseMode = !eraseMode;
+    randomMode = false;
+
+    if (eraseMode) {
+      eraseButtonEl.classList.add('active');
+      randomButtonEl.classList.remove('active');
+    } else {
+      eraseButtonEl.classList.remove('active');
+    }
+  });
+
+  randomButtonEl.addEventListener('click', (event) => {
+    randomMode = !randomMode;
+    eraseMode = false;
+
+    if (randomMode) {
+      randomButtonEl.classList.add('active');
+      eraseButtonEl.classList.remove('active');
+    } else {
+      randomButtonEl.classList.remove('active');
+    }
+  });
+
   hasInit = true;
 }
 
@@ -118,6 +145,8 @@ function generateGrid(size = 1) {
             if (randomMode) {
               cellColEl.style.background = getRandomHexColor();
               cellColEl.style.background = getRandomHexColor();
+            } else if (eraseMode) {
+              cellColEl.style.background = 'transparent';
             } else {
               cellColEl.style.background = color;
             }
@@ -143,6 +172,8 @@ function generateGrid(size = 1) {
               if (randomMode) {
                 cellCollElFromPoint.style.background = getRandomHexColor();
                 cellCollElFromPoint.style.background = getRandomHexColor();
+              } else if (eraseMode) {
+                cellCollElFromPoint.style.background = 'transparent';
               } else {
                 cellCollElFromPoint.style.background = color;
               }
