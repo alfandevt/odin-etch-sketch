@@ -10,9 +10,11 @@ let color = defaultColor;
 let bgColor = defaultBgColor;
 let randomMode = false;
 let eraseMode = false;
+let showOverlay = false;
 
 let hasInit = false;
 
+/* Preserve Elements */
 const boardEl = document.querySelector('#board');
 const resetButtonEl = document.querySelector('#reset-button');
 const eraseButtonEl = document.querySelector('#erase-button');
@@ -21,6 +23,11 @@ const sizeSliderEl = document.querySelector('#size-slider');
 const sliderText = document.querySelector('#slider-text');
 const colorPicker = document.querySelector('#color-picker');
 const colorPickerBg = document.querySelector('#color-picker-bg');
+
+/* Created Elements */
+const overlayEl = document.createElement('div');
+const safeAreaEl = document.createElement('div');
+const overlayButtonEl = document.createElement('button');
 
 const EVENTS = {
   RENDER: 'RENDER',
@@ -46,6 +53,9 @@ function onRender() {
 }
 
 function initRender() {
+  overlayEl.classList.add('overlay');
+  safeAreaEl.classList.add('safe-area');
+  overlayButtonEl.classList.add('safe-area-button');
   sliderText.textContent = `${minimumGridSize} x ${minimumGridSize}`;
 
   sizeSliderEl.setAttribute('value', gridSize);
