@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main id="main">
+      <div class="tools-container">
+        <h1 class="main-title">Etch a Sketch</h1>
+
+        <div class="tools-item">
+          <label for="color-picker">Color</label>
+          <div class="color-wrapper">
+            <input
+              type="color"
+              class="color-input"
+              name="color"
+              id="color-picker"
+            />
+          </div>
+        </div>
+
+        <div class="tools-item">
+          <label for="color-picker-bg">Background</label>
+          <div class="color-wrapper">
+            <input
+              type="color"
+              class="color-input"
+              name="color"
+              id="color-picker-bg"
+            />
+          </div>
+        </div>
+
+        <div class="tools-item">
+          <button class="button" id="reset-button" type="button">Reset</button>
+        </div>
+      </div>
+
+      <!-- Grid Container Start -->
+      <div id="board" class="board-container"></div>
+
+      <div class="tools-container">
+        <div class="tools-item">
+          <span>Grid Size</span>
+          <label for="size-slider">
+            <span id="slider-text"></span>
+          </label>
+          <input type="range" name="size" id="size-slider" />
+        </div>
+        <div class="tools-item">
+          <button class="button round" id="random-button" type="button">
+            Magic
+          </button>
+        </div>
+        <div class="tools-item">
+          <button class="button round" id="erase-button" type="button">Erase</button>
+        </div>
+      </div>
+      <!-- Grid Container End -->
+    </main>
+    <script src="main.js"></script>
+  </body>
+</html>
