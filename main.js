@@ -1,5 +1,6 @@
 const minimumGridSize = '8';
 const maxGridSize = '96';
+const maxAlpha = 255;
 const stepSize = '8';
 const defaultColor = '#000000';
 const defaultBgColor = '#ffffff';
