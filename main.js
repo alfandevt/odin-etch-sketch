@@ -17,7 +17,7 @@ let hasAlpha = false;
 let hasInit = false;
 
 const initParagraphTexts = [
-  'use 🧹 button to erase',
+  'use 🧹 button or \'right mouse\' click to erase',
   'use 🖌️ button to add alpha',
   "use 🪄 button for 'magic' color",
   'use 🔁 to reset all',
