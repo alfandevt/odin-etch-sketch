@@ -9,9 +9,9 @@ const defaultBgColor = '#ffffff';
 let gridSize = minGridSize;
 let color = defaultColor;
 let bgColor = defaultBgColor;
+
 let randomMode = false;
 let eraseMode = false;
-let showOverlay = true;
 let hasReset = false;
 let hasAlpha = false;
 let hasInit = false;
@@ -21,6 +21,7 @@ const initParagraphTexts = [
   'use 🖌️ button to add alpha',
   "use 🪄 button for 'magic' color",
   'use 🔁 to reset all',
+  "use the slider to resize the grid size \n(any progress won't be saved!)",
 ];
 
 /* Preserve Elements */
@@ -39,7 +40,6 @@ const screenEl = document.querySelector('#screen');
 const overlayEl = document.createElement('div');
 const safeAreaEl = document.createElement('div');
 const overlayFirstButton = document.createElement('button');
-const overlaySecondButton = document.createElement('button');
 const overlayButtonContainer = document.createElement('div');
 const overlayHeading = document.createElement('h2');
 const overlayContent = document.createElement('div');
@@ -74,16 +74,14 @@ function onRender() {
 
 function initRender() {
   overlayEl.classList.add('overlay');
-  // overlayEl.classList.add('show');
   safeAreaEl.classList.add('safe-area');
-  overlayFirstButton.classList.add('button', 'success');
-  overlaySecondButton.classList.add('button', 'danger');
+  overlayFirstButton.classList.add('button');
   overlayButtonContainer.classList.add('button-container');
   overlayHeading.classList.add('title');
   overlayContent.classList.add('content');
   overlayFirstButton.textContent = 'Close';
 
-  overlayHeading.textContent = 'HINT';
+  overlayHeading.textContent = 'HINTS';
 
   const ulEL = document.createElement('ul');
   initParagraphTexts.forEach((p) => {
@@ -180,8 +178,11 @@ function initRender() {
 
   overlayFirstButton.addEventListener('click', () => {
     hideOverlay();
+    enableAllButtonsAndInput();
     removeOverlayButtonListener();
   });
+
+  disableAllButtonsAndInput();
 
   showOverlayEl();
   hasInit = true;
@@ -365,27 +366,6 @@ function drawOnCellElement(cell, alpha = 1) {
   }
 }
 
-function showPrompt(title = 'Alert', message = '', callback = null) {
-  overlayContent.replaceChildren();
-  overlayHeading.textContent = title;
-  const pEl = document.createElement('p');
-  pEl.textContent = message;
-  overlayContent.append(pEl);
-
-  overlayFirstButton.addEventListener('click', () => {
-    if (typeof callback === 'function') {
-      callback();
-    }
-    hideOverlay();
-    removeOverlayButtonListener();
-  });
-
-  overlaySecondButton.addEventListener('click', () => {
-    hideOverlay();
-    removeOverlayButtonListener();
-  });
-}
-
 function showOverlayEl() {
   overlayEl.classList.add('show');
 }
@@ -396,5 +376,22 @@ function hideOverlay() {
 
 function removeOverlayButtonListener() {
   overlayFirstButton.removeEventListener('click');
-  overlaySecondButton.removeEventListener('click');
+}
+
+function disableAllButtonsAndInput() {
+  colorPicker.disabled = true;
+  colorPickerBg.disabled = true;
+  resetButtonEl.disabled = true;
+  randomButtonEl.disabled = true;
+  alphaButtonEl.disabled = true;
+  eraseButtonEl.disabled = true;
+}
+
+function enableAllButtonsAndInput() {
+  colorPicker.disabled = false;
+  colorPickerBg.disabled = false;
+  resetButtonEl.disabled = false;
+  randomButtonEl.disabled = false;
+  alphaButtonEl.disabled = false;
+  eraseButtonEl.disabled = false;
 }
