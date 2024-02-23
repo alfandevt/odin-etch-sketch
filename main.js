@@ -52,7 +52,6 @@ const EVENTS = {
 
 const MoveEvents = ['mousemove', 'touchmove'];
 const DownEvents = ['mousedown', 'touchstart'];
-const UpEvents = ['mouseup', 'touchend'];
 
 document.addEventListener('DOMContentLoaded', onDOMContentLoaded);
 document.addEventListener(EVENTS.RENDER, onRender);
@@ -186,8 +185,8 @@ function initRender() {
   );
 
   disableAllButtonsAndInput();
-
   showOverlayEl();
+
   hasInit = true;
 }
 
@@ -272,12 +271,6 @@ function generateGrid(size = 1) {
         });
       });
 
-      UpEvents.forEach((upEvent) => {
-        cellColEl.addEventListener(upEvent, (event) => {
-          event.preventDefault();
-        });
-      });
-
       cellColEl.addEventListener('contextmenu', (event) => {
         event.preventDefault();
         return false;
@@ -358,7 +351,8 @@ function drawOnCellElement(cell, alpha = 1) {
     cell.dataset.alpha = `${parsed + minAlpha}`;
     alpha = parseFloat(cell.dataset.alpha);
   } else {
-    alpha = maxAlpha;
+    cell.dataset.alpha = `${maxAlpha}`;
+    alpha = parseFloat(cell.dataset.alpha);
   }
 
   if (cell) {
