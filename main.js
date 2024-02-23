@@ -10,8 +10,8 @@ let gridSize = minGridSize;
 let color = defaultColor;
 let bgColor = defaultBgColor;
 
-let randomMode = false;
-let eraseMode = false;
+let hasRandomMode = false;
+let hasEraseMode = false;
 let hasReset = false;
 let hasAlpha = false;
 let hasInit = false;
@@ -126,9 +126,9 @@ function initRender() {
     gridSize = minGridSize;
     color = defaultColor;
     bgColor = defaultBgColor;
-    randomMode = false;
+    hasRandomMode = false;
     hasAlpha = false;
-    eraseMode = false;
+    hasEraseMode = false;
     hasReset = true;
 
     document.dispatchEvent(new Event(EVENTS.RENDER));
@@ -136,8 +136,8 @@ function initRender() {
 
   alphaButtonEl.addEventListener('click', () => {
     hasAlpha = !hasAlpha;
-    eraseMode = false;
-    randomMode = false;
+    hasEraseMode = false;
+    hasRandomMode = false;
 
     if (hasAlpha) {
       alphaButtonEl.classList.add('active');
@@ -149,11 +149,11 @@ function initRender() {
   });
 
   eraseButtonEl.addEventListener('click', () => {
-    eraseMode = !eraseMode;
-    randomMode = false;
+    hasEraseMode = !hasEraseMode;
+    hasRandomMode = false;
     hasAlpha = false;
 
-    if (eraseMode) {
+    if (hasEraseMode) {
       eraseButtonEl.classList.add('active');
       randomButtonEl.classList.remove('active');
       alphaButtonEl.classList.remove('active');
@@ -163,11 +163,11 @@ function initRender() {
   });
 
   randomButtonEl.addEventListener('click', () => {
-    randomMode = !randomMode;
-    eraseMode = false;
+    hasRandomMode = !hasRandomMode;
+    hasEraseMode = false;
     hasAlpha = false;
 
-    if (randomMode) {
+    if (hasRandomMode) {
       randomButtonEl.classList.add('active');
       eraseButtonEl.classList.remove('active');
       alphaButtonEl.classList.remove('active');
@@ -176,11 +176,14 @@ function initRender() {
     }
   });
 
-  overlayFirstButton.addEventListener('click', () => {
-    hideOverlay();
-    enableAllButtonsAndInput();
-    removeOverlayButtonListener();
-  });
+  overlayFirstButton.addEventListener(
+    'click',
+    () => {
+      hideOverlay();
+      enableAllButtonsAndInput();
+    },
+    { once: true }
+  );
 
   disableAllButtonsAndInput();
 
@@ -336,11 +339,11 @@ function getRGBfromHex(hex) {
 }
 
 function fillColorToElement(element, alpha = 1) {
-  if (randomMode) {
+  if (hasRandomMode) {
     const randHex = getRandomHexColor();
     const { r, g, b } = getRGBfromHex(randHex);
     element.style.background = `rgba(${r}, ${g}, ${b}, ${alpha})`;
-  } else if (eraseMode) {
+  } else if (hasEraseMode) {
     element.style.background = 'transparent';
     element.dataset.alpha = 0;
   } else {
@@ -372,10 +375,6 @@ function showOverlayEl() {
 
 function hideOverlay() {
   overlayEl.classList.remove('show');
-}
-
-function removeOverlayButtonListener() {
-  overlayFirstButton.removeEventListener('click');
 }
 
 function disableAllButtonsAndInput() {

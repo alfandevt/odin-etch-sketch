@@ -220,20 +220,21 @@ body {
   box-sizing: border-box;
   width: 500px;
   padding: 1.2rem;
+  outline: 2px solid black;
   margin: 2rem 0;
   border-radius: 10px;
-  box-shadow: 2px 3px 6px 4px #f9f07a, -3px 2px 2px 4px #e6ce63;
-  /* box-shadow: 2px 3px 5px 4px #cdcccc, -3px 2px 2px 4px #828282; */
+  box-shadow: 2px 3px 4px -4px #f9f07a, -3px 2px 8px -4px #e6ce63;
 }
 
 .tools-container:first-child {
-  margin-bottom: 0.8rem;
+  margin-bottom: 0;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+  box-shadow: 2px 0 4px -4px #f9f07a, -3px 0 8px -4px #e6ce63;
 }
 
 .tools-container:last-child {
-  margin-top: 0.8rem;
+  margin-top: 0;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
@@ -247,7 +248,7 @@ body {
 
 .board-container {
   transition: background-color 0.2s ease-in;
-  box-shadow: 2px 3px 5px 4px #cdcccc, -3px 2px 2px 4px #828282;
+  box-shadow: 2px 3px 4px -4px #cdcccc, -3px 2px 8px -4px #828282;
 }
 
 /* Cells Start */
